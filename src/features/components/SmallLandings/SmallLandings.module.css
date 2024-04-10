@@ -1,0 +1,9 @@
+.landings {
+  background-color: green;
+  padding: 10px 20px;
+  border-radius: 15px;
+  background: transparent;
+  border-style: solid;
+  border: 1px solid #ccb39c;
+  color: #7e7b7b;
+}

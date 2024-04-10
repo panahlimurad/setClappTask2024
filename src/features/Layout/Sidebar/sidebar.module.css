@@ -1,0 +1,38 @@
+.container{
+    background-color: #31373c;
+    min-height: 100vh;
+}
+
+.containerLogo{
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.containerLogo img{
+    height: 60%;
+}
+
+ul{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 10px;
+}
+
+ul li{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 15px;
+    padding: 10px;
+    &:hover{
+        background-color:#4e5255;
+        transition: 0.7s ease;
+    }
+}
+

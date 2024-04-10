@@ -1,0 +1,19 @@
+.container{
+    height: 10%;
+    display: flex;
+    justify-content: space-evenly;
+    gap: 50px;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.container input{
+    width: 25%;
+    height: 60%;
+    border-radius: 5px;
+    font-size: 25px;
+    color: #6b6767;
+
+}
+
+
