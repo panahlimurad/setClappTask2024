@@ -7,7 +7,7 @@ function Main() {
     return (
       <div>
         <CardContainer/>
-        <SpecialProductSection/>
+        {/* <SpecialProductSection/> */}
         <CategoryNameSpecial/>
       </div>
     )

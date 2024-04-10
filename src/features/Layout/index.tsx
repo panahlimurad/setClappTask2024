@@ -6,6 +6,7 @@ import styles from "./layout.module.css";
 import Products from "../../pages/Products/products";
 import Admin from "../../pages/Admin/admin";
 import NavigationBar from "../components/NavigationBar/NavigationBar";
+import ProductDetails from "../../pages/ProductDetails/product-details";
 
 function Layout() {
   return (
@@ -18,6 +19,7 @@ function Layout() {
           <Route path="/" element={<Main />} />
           <Route path="/products" element={<Products />} />
           <Route path="/admin" element={<Admin />} />
+          <Route path="/product-details/:id" element={<ProductDetails />} />
         </Routes>
       </div>
     </div>

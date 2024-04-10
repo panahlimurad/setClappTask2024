@@ -1,0 +1,26 @@
+.container{
+    height: 60%;
+    display: flex;
+    margin-top: 30px;
+    gap: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.product_img{
+    height: 100%;
+}
+
+.product_img img{
+    height: 100%;
+}
+
+.product_info{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.product_info span{
+    color: rgb(192, 100, 100);
+}

@@ -7,6 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useTranslation } from "react-i18next";
 
 
 function createData(
@@ -27,16 +28,18 @@ function createData(
   ];
 
 function AdminTable() {
+
+  const [t,i18n] = useTranslation()
   return (
     <TableContainer sx={{width:"70%",margin:"50px auto"}} component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Products</TableCell>
+            <TableCell>{t("PRODUCTS")}</TableCell>
             <TableCell align="right">Calories</TableCell>
             <TableCell align="right">Price</TableCell>
             <TableCell align="right">Count</TableCell>
-            <TableCell align="right">Delete</TableCell>
+            <TableCell align="right">{t("DELETE")}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

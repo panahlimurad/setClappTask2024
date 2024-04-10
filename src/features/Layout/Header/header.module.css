@@ -2,6 +2,8 @@
     background-color: rgb(104, 112, 110);
     display: flex;
     justify-content: flex-end;
+    min-height: 80px;
+    min-width: 100vw;
 }
 
 .container div{

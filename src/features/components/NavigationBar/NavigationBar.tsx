@@ -1,42 +1,57 @@
-import Box from '@mui/material/Box';
-import BottomNavigation from '@mui/material/BottomNavigation';
-import BottomNavigationAction from '@mui/material/BottomNavigationAction';
+import Box from "@mui/material/Box";
+import BottomNavigation from "@mui/material/BottomNavigation";
+import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
-import { useState } from 'react';
-
-
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import ListItemText from "@mui/material/ListItemText";
+import ListSubheader from "@mui/material/ListSubheader";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 function NavigationBar() {
-    const [value, setValue] = useState(0);
-    const [open, setOpen] =  useState(false);
 
-    const handleClick = () => {
-        setOpen(!open);
-      };
+  const [t, i18n] = useTranslation();
+  const [value, setValue] = useState(0);
+  const [open, setOpen] = useState(false);
 
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   return (
     <>
-    <Box>
-    <BottomNavigation
-      showLabels
-      value={value}
-      onChange={(event, newValue) => {
-        setValue(newValue);
-      }}
-    >
-      <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-      <BottomNavigationAction onClick={handleClick} label="Products" icon={<ShoppingBasketOutlinedIcon />} />
-      <BottomNavigationAction label="Admin" icon={<SupervisorAccountOutlinedIcon />} />
-    </BottomNavigation>
-  </Box>
-  {/* <List
+      <Box>
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}>
+          <BottomNavigationAction 
+          component={Link}
+          to="/" 
+          label={t("HOME")} 
+          icon={<HomeIcon />} />
+          <BottomNavigationAction
+            component={Link}
+            to="/products"
+            onClick={handleClick}
+            label={t("PRODUCTS")}
+            icon={<ShoppingBasketOutlinedIcon />}
+          />
+          <BottomNavigationAction
+          component={Link}
+          to="/admin"
+            label={t("ADMIN")}
+            icon={<SupervisorAccountOutlinedIcon />}
+          />
+        </BottomNavigation>
+      </Box>
+      {/* <List
   disablePadding={true}
       sx={{
         // zIndex:1000,
@@ -63,8 +78,8 @@ function NavigationBar() {
         </li>
       ))}
     </List> */}
-</>
-  )
+    </>
+  );
 }
 
-export default NavigationBar
+export default NavigationBar;

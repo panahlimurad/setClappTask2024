@@ -4,9 +4,10 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-
+import { useTranslation } from "react-i18next";
 
 function ProductTopSection() {
+  const [t,i18n] = useTranslation()
 
     const [age, setAge] = React.useState('');
 
@@ -17,9 +18,9 @@ function ProductTopSection() {
 
   return (
     <div className={styles.container}>
-        <input type="text" />
+        <input type="text" placeholder={t("SEARCH")}/>
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-      <InputLabel id="demo-select-small-label">Filter</InputLabel>
+      <InputLabel id="demo-select-small-label">{t("FILTER")}</InputLabel>
       <Select
         labelId="demo-select-small-label"
         id="demo-select-small"

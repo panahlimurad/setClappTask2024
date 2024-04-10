@@ -1,9 +1,10 @@
 import React from 'react'
 import CategoryNameContainer from '../../components/CategoryNameContainer/CategoryNameContainer'
+import styles from './CategoryNameSpecial.module.css'
 
 function CategoryNameSpecial() {
   return (
-    <div>
+    <div className={styles.container}>
         <CategoryNameContainer/>
     </div>
   )

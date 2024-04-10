@@ -5,15 +5,6 @@ function CategoryNameContainer() {
   return (
     <div className={styles.categoryName}>
       <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
-      <SmallLandings />
     </div>
   );
 }

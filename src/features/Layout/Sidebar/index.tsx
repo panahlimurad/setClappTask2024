@@ -2,9 +2,12 @@ import styles from "./sidebar.module.css";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 function Sidebar() {
+  const [t, i18n] = useTranslation();
+
   return (
     <div className={styles.container}>
       <div className={styles.containerLogo}>
@@ -23,7 +26,7 @@ function Sidebar() {
                 fontSize: "30px",
               }}
             />{" "}
-            Home
+            {t("HOME")}
           </li>
         </Link>
         <Link to="/products">
@@ -34,7 +37,7 @@ function Sidebar() {
                 fontSize: "30px",
               }}
             />{" "}
-            Products
+            {t("PRODUCTS")}
           </li>
         </Link>
         <Link to="/admin">
@@ -45,7 +48,7 @@ function Sidebar() {
                 fontSize: "30px",
               }}
             />{" "}
-            Admin
+            {t("ADMIN")}
           </li>
         </Link>
       </ul>
