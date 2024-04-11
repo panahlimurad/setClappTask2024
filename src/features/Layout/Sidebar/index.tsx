@@ -8,6 +8,10 @@ import { Link } from "react-router-dom";
 function Sidebar() {
   const [t, i18n] = useTranslation();
 
+  const refreshPage = ()=>{
+    window.location.reload()
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.containerLogo}>
@@ -18,7 +22,7 @@ function Sidebar() {
       </div>
 
       <ul>
-        <Link to="/">
+        <Link to="/" onClick={refreshPage} >
           <li>
             <HomeIcon
               style={{
@@ -29,7 +33,7 @@ function Sidebar() {
             {t("HOME")}
           </li>
         </Link>
-        <Link to="/products">
+        <Link to="/products" onClick={refreshPage}>
           <li>
             <ShoppingBasketOutlinedIcon
               style={{

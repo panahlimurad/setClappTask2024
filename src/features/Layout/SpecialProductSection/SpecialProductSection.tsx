@@ -1,13 +1,12 @@
-import SpecialCardsContainer from '../../components/SpecialCardsContainer/SpecialCardsContainer'
-import styles from './SpecialProductSection.module.css'
+import SpecialCardsContainer from "../../components/SpecialCardsContainer/SpecialCardsContainer";
+import styles from "./SpecialProductSection.module.css";
 
 function SpecialProductSection() {
   return (
     <div className={styles.container}>
-        <SpecialCardsContainer/>
-
+      <SpecialCardsContainer />
     </div>
-  )
+  );
 }
 
-export default SpecialProductSection
+export default SpecialProductSection;

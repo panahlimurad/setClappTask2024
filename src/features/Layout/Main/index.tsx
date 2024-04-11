@@ -1,4 +1,4 @@
-import CardContainer from '../../components/CardContainer/CardContainer'
+import Products from '../../../pages/Products/products'
 import CategoryNameSpecial from '../CategoryNameSpecial/CategoryNameSpecial'
 import SpecialProductSection from '../SpecialProductSection/SpecialProductSection'
 
@@ -6,7 +6,7 @@ import SpecialProductSection from '../SpecialProductSection/SpecialProductSectio
 function Main() {
     return (
       <div>
-        <CardContainer/>
+        <Products/>
         {/* <SpecialProductSection/> */}
         <CategoryNameSpecial/>
       </div>

@@ -8,8 +8,6 @@ function SmallLandings() {
     queryFn: getProducts,
   });
 
-  console.log(data?.products);
-
   return (
     <>
       {data?.products?.slice(0, 25).map((data: any, index: any) => (

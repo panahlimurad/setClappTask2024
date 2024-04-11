@@ -18,6 +18,10 @@ function NavigationBar() {
   const [value, setValue] = useState(0);
   const [open, setOpen] = useState(false);
 
+  const refreshPage = ()=>{
+    window.location.reload()
+  }
+
   const handleClick = () => {
     setOpen(!open);
   };
@@ -33,6 +37,7 @@ function NavigationBar() {
           }}>
           <BottomNavigationAction 
           component={Link}
+          onClick={refreshPage}
           to="/" 
           label={t("HOME")} 
           icon={<HomeIcon />} />
