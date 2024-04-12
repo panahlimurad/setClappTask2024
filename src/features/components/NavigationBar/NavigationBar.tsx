@@ -4,21 +4,21 @@ import BottomNavigationAction from "@mui/material/BottomNavigationAction";
 import HomeIcon from "@mui/icons-material/Home";
 import ShoppingBasketOutlinedIcon from "@mui/icons-material/ShoppingBasketOutlined";
 import SupervisorAccountOutlinedIcon from "@mui/icons-material/SupervisorAccountOutlined";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import ListSubheader from "@mui/material/ListSubheader";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
+import styles from './NavigationBar.module.css'
 
 function NavigationBar() {
-
-  const [t, i18n] = useTranslation();
-  const [value, setValue] = useState(0);
-  const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
+ 
+ 
+  const [t] = useTranslation();
+  const [value, setValue] = useState<number>(0);
+  const [open, setOpen] = useState<boolean>(false);
 
   const refreshPage = ()=>{
+    navigate("/")
     window.location.reload()
   }
 
@@ -27,8 +27,8 @@ function NavigationBar() {
   };
 
   return (
-    <>
-      <Box>
+    <div className={styles.navigationContainer}>
+      <Box sx={{backgroundColor:"red",width:"100%"}}>
         <BottomNavigation
           showLabels
           value={value}
@@ -56,34 +56,7 @@ function NavigationBar() {
           />
         </BottomNavigation>
       </Box>
-      {/* <List
-  disablePadding={true}
-      sx={{
-        // zIndex:1000,
-        width: '100%',
-        maxWidth: 360,
-        bgcolor: 'background.paper',
-        position: 'relative',
-        overflow: 'auto',
-        maxHeight: 300,
-        '& ul': { padding: 0 },
-      }}
-      subheader={<li />}
-    >
-      {open && [0, 1, 2, 3, 4].map((sectionId) => (
-        <li key={`section-${sectionId}`}>
-          <ul>
-            <ListSubheader>{`I'm sticky ${sectionId}`}</ListSubheader>
-            {[0, 1, 2].map((item) => (
-              <ListItem key={`item-${sectionId}-${item}`}>
-                <ListItemText secondary={`Item ${item}`} />
-              </ListItem>
-            ))}
-          </ul>
-        </li>
-      ))}
-    </List> */}
-    </>
+    </div>
   );
 }
 

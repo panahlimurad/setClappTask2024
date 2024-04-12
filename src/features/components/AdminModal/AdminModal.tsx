@@ -7,115 +7,90 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { useForm } from 'react-hook-form';
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 interface FormData {
-    product: string;
-    price: number;
-    stock: number;
-  }
+  product: string;
+  price: number;
+  stock: number;
+}
 
 export default function FormDialog() {
-  const [open, setOpen] = React.useState(false);
-  const productInputRef = React.useRef<HTMLInputElement>(null);
-  const priceInputRef = React.useRef<HTMLInputElement>(null);
-  const stockInputRef = React.useRef<HTMLInputElement>(null);
+  const [open, setOpen] = React.useState<boolean>(false);
+  const { register, handleSubmit, formState: { errors, isDirty, isValid } } = useForm<FormData>();
 
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>();
-
-  
-  const onSubmit = () => {
-    if (productInputRef.current && priceInputRef.current && stockInputRef.current) {
-        const productInput = productInputRef.current;
-        const priceInput = priceInputRef.current;
-        const stockInput = stockInputRef.current;
-        const newObj = {
-            brand: productInput.value, 
-            price: priceInput.value, 
-            stock: stockInput.value, 
-
-        }
-        localStorage.setItem('CreateStore', JSON.stringify(newObj));
-        
-      }
+  const onSubmit = (data: FormData) => {
+    localStorage.setItem('CreateStore', JSON.stringify(data));
+    setOpen(false);
+    toast.success("Product created in localStorage", {autoClose: 1000});
   };
 
-  const handleClickOpen = () => {
+  const handleClickOpen = ():void => {
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = ():void => {
     setOpen(false);
   };
 
   return (
     <React.Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
+      <Button sx={{ marginTop: "50px", marginLeft: "30px" }} variant="outlined" onClick={handleClickOpen}>
         Add Product
       </Button>
       <Dialog
-        onSubmit={handleSubmit(onSubmit)}
         open={open}
         onClose={handleClose}
-        PaperProps={{
-          component: 'form',
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            handleClose();
-          },
-        }}
       >
-        <DialogTitle>Create Product</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We
-            will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            inputRef={productInputRef}
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="product"
-            label="Product Name"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          {errors.product &&<span>This Field is required</span> }
-           <TextField
-           inputRef={priceInputRef}
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="price"
-            label="Product Price"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          {errors.price &&<span>This Field is required</span> }
-          <TextField
-          inputRef={stockInputRef}
-            autoFocus
-            required
-            margin="dense"
-            id="name"
-            name="stock"
-            label="Product Stock"
-            type="text"
-            fullWidth
-            variant="standard"
-          />
-          {errors.stock &&<span>This Field is required</span> }
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button type="submit">Subscribe</Button>
-        </DialogActions>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <DialogTitle>Create Product</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              To subscribe to this website, please enter your email address here. We
+              will send updates occasionally.
+            </DialogContentText>
+            <TextField
+              {...register('product', { required: true })}
+              autoFocus
+              margin="dense"
+              id="productName"
+              label="Product Name"
+              type="text"
+              fullWidth
+              variant="standard"
+            />
+            {errors.product && <span>This Field is required</span>}
+            <TextField
+              {...register('price', { required: true })}
+              autoFocus
+              margin="dense"
+              id="productPrice"
+              label="Product Price"
+              type="number"
+              fullWidth
+              variant="standard"
+            />
+            {errors.price && <span>This Field is required</span>}
+            <TextField
+              {...register('stock', { required: true })}
+              autoFocus
+              margin="dense"
+              id="productStock"
+              label="Product Stock"
+              type="number"
+              fullWidth
+              variant="standard"
+            />
+            {errors.stock && <span>This Field is required</span>}
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button disabled={!isDirty || !isValid} type="submit">Subscribe</Button>
+          </DialogActions>
+        </form>
       </Dialog>
+      <ToastContainer />
     </React.Fragment>
   );
 }

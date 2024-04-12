@@ -1,17 +1,23 @@
 import styles from "./Card.module.css";
-import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { Button, CardActionArea } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 import { Link } from "react-router-dom";
 
 function Cards({data}:{data:any}) {
   
   return (
     <Link to={`/product-details/${data?.id}`}>
-    <Card sx={{ width: 250, }}>
+    <Card sx={{
+       width: 250, 
+       minHeight: 350, 
+       transition: 'padding 0.3s',
+       '&:hover': {
+         padding: '5px',
+       }, 
+    }}>
       <CardActionArea>
         <CardMedia
           component="img"

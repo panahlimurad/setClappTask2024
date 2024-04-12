@@ -1,9 +1,9 @@
 import AdminTable from "../../features/components/AdminTable/AdminTable"
-
+import styles from './admin.module.css'
 
 function Admin() {
     return (
-      <div>
+      <div className={styles.container}>
 
       <AdminTable/>
 
