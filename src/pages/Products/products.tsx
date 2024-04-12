@@ -2,34 +2,46 @@
 import CardContainer from "../../features/components/CardContainer/CardContainer";
 import ProductTopSection from "../../features/components/ProductTopSection/ProductTopSection";
 import { useQuery } from "@tanstack/react-query";
-import { getProducts, getProductsOfCategory, searchProducts } from "../../features/services/api";
+import {
+  getProducts,
+  getProductsOfCategory,
+  searchProducts,
+} from "../../features/services/api";
 import Loading from "../../features/components/Loading/Loading";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 function Products() {
   const location = useLocation();
-  const pattern = /=(.*)/
+  const pattern = /=(.*)/;
   const categorySlug = location.search.match(pattern);
   const { pathname } = location;
 
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState<string>("");
+  const [dataSearch, setDataSearch] = useState<Array<any>>([]);
+  const { data: dataCategory } = useQuery({
+    queryKey: ["withCategory"],
+    queryFn: () => {
+      if (categorySlug) {
+        return getProductsOfCategory(categorySlug[1]);
+      }
+    },
+  });
 
-  const { data:dataCategory } = useQuery({ queryKey: ["withCategory"], queryFn: () => {
-    if(categorySlug){
-     return getProductsOfCategory(categorySlug[1])
-    }
-  } });
+  useEffect(() => {
+    const searchData = async () => {
+      const data = await searchProducts(inputValue);
+      setDataSearch(data);
+    };
 
-  const { data:dataSearch } = useQuery({ queryKey: ["searchProducts"], queryFn: () => {
-    if(inputValue){
-     return searchProducts(inputValue)
+    searchData();
+  }, [inputValue]);
 
-    }
-  } });
+  const { data, isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: () => getProducts(),
+  });
 
-  const { data, isLoading } = useQuery({ queryKey: ["products"], queryFn: () => getProducts()});
-    
   const handleSearch = () => {
     setInputValue(inputValue);
   };
@@ -37,16 +49,24 @@ function Products() {
   const handleInputValueChange = (value: any) => {
     setInputValue(value);
   };
-console.log(dataSearch);
 
   return (
     <div>
       {pathname === "/products" && (
         <>
-          <ProductTopSection onInputChange={handleInputValueChange} onSearch={handleSearch} />
+          <ProductTopSection
+            onInputChange={handleInputValueChange}
+            onSearch={handleSearch}
+          />
         </>
       )}
-      {isLoading ? <Loading /> : <CardContainer data={dataSearch ? dataSearch : categorySlug ? dataCategory : data} />}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CardContainer
+          data={dataSearch ? dataSearch : categorySlug ? dataCategory : data}
+        />
+      )}
     </div>
   );
 }
